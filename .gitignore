@@ -64,5 +64,5 @@ iOSInjectionProject/
 .idea/
 build/
 dist/
-test.py
+test*.py
 *.pyc
