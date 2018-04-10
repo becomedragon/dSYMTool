@@ -1,0 +1,2 @@
+# dSYMTool
+dsymtool for mac
