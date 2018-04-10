@@ -48,10 +48,6 @@
  */
 @property (weak) IBOutlet NSTextField *selectedUUIDLabel;
 
-/**
- *  显示默认的 Slide Address
- */
-@property (weak) IBOutlet NSTextField *defaultSlideAddressLabel;
 
 /**
  *  显示错误内存地址
@@ -344,7 +340,6 @@
     [self.radioBox.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     _selectedUUIDInfo = nil;
     self.selectedUUIDLabel.stringValue = @"";
-    self.defaultSlideAddressLabel.stringValue = @"";
     self.errorMemoryAddressLabel.stringValue = @"";
     [self.errorMessageView setString:@""];
 }
@@ -354,7 +349,6 @@
     NSInteger tag = radioButton.tag;
     _selectedUUIDInfo = _selectedArchiveInfo.uuidInfos[tag - 1];
     _selectedUUIDLabel.stringValue = _selectedUUIDInfo.uuid;
-    _defaultSlideAddressLabel.stringValue = _selectedUUIDInfo.defaultSlideAddress;
 }
 
 - (void)doubleActionMethod{
@@ -370,17 +364,24 @@
         return;
     }
 
-    if([self.defaultSlideAddressLabel.stringValue isEqualToString:@""]){
-        return;
-    }
-
     if([self.errorMemoryAddressLabel.stringValue isEqualToString:@""]){
         return;
     }
-
-    NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, self.defaultSlideAddressLabel.stringValue, self.errorMemoryAddressLabel.stringValue];
-    NSString *result = [self runCommand:commandString];
-    [self.errorMessageView setString:result];
+    
+    NSArray *errorAddressArray = [self.errorMemoryAddressLabel.stringValue componentsSeparatedByString:@"\n"];
+    NSString *resultStr = @"";
+    for (NSString *str in errorAddressArray) {
+        NSRange range = [str rangeOfString:@"0x"];
+        NSRange addreddRange = NSMakeRange(range.location, str.length - range.location);
+        NSString *address = [str substringWithRange:addreddRange];
+        NSArray *addressArray = [address componentsSeparatedByString:@" "];
+        NSString *errorAddressStr = addressArray[0];
+        NSString *slideAddressStr = addressArray[1];
+        NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, slideAddressStr, errorAddressStr];
+        NSString *result = [self runCommand:commandString];
+        resultStr = [NSString stringWithFormat:@"%@\n%@",resultStr,result] ;
+    }
+    [self.errorMessageView setString:resultStr];
 }
 
 
