@@ -180,7 +180,7 @@
                                     <color key="textColor" red="0.37254901960784315" green="0.61960784313725492" blue="0.62745098039215685" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="510" height="223"/>
-                                    <size key="maxSize" width="510" height="10000000"/>
+                                    <size key="maxSize" width="512" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 </textView>
                             </subviews>
@@ -210,12 +210,12 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Plr-D5-xz6" firstAttribute="centerX" secondItem="o8b-PU-Uou" secondAttribute="centerX" id="2iR-Sy-9D5"/>
+                    <constraint firstAttribute="bottom" secondItem="Plr-D5-xz6" secondAttribute="bottom" constant="9" id="0Ln-Ke-aWF"/>
                     <constraint firstAttribute="trailing" secondItem="nej-g8-k6U" secondAttribute="trailing" constant="9" id="AbK-AD-WCG"/>
-                    <constraint firstItem="Plr-D5-xz6" firstAttribute="top" secondItem="o8b-PU-Uou" secondAttribute="bottom" constant="246" id="CNI-zQ-nad"/>
                     <constraint firstItem="M5P-C5-Et8" firstAttribute="leading" secondItem="z8h-yZ-msW" secondAttribute="leading" constant="8" id="Ewl-EF-e7N"/>
                     <constraint firstItem="o8b-PU-Uou" firstAttribute="trailing" secondItem="M5P-C5-Et8" secondAttribute="trailing" id="GGc-YR-e9S"/>
                     <constraint firstItem="o8b-PU-Uou" firstAttribute="leading" secondItem="M5P-C5-Et8" secondAttribute="leading" id="GKv-b7-i9j"/>
+                    <constraint firstItem="Plr-D5-xz6" firstAttribute="centerX" secondItem="z8h-yZ-msW" secondAttribute="centerX" id="IW2-NX-KS2"/>
                     <constraint firstAttribute="trailing" secondItem="M5P-C5-Et8" secondAttribute="trailing" constant="8" id="IfO-0r-UXu"/>
                     <constraint firstItem="M5P-C5-Et8" firstAttribute="top" secondItem="adk-IY-a8c" secondAttribute="bottom" constant="10" id="M1z-tF-NQI"/>
                     <constraint firstItem="nej-g8-k6U" firstAttribute="leading" secondItem="z8h-yZ-msW" secondAttribute="leading" constant="9" id="QA7-xJ-dvM"/>

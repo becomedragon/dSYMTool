@@ -373,13 +373,16 @@
     for (NSString *str in errorAddressArray) {
         NSRange range = [str rangeOfString:@"0x"];
         NSRange addreddRange = NSMakeRange(range.location, str.length - range.location);
+        NSRange preStr = NSMakeRange(0, range.location);
         NSString *address = [str substringWithRange:addreddRange];
         NSArray *addressArray = [address componentsSeparatedByString:@" "];
         NSString *errorAddressStr = addressArray[0];
         NSString *slideAddressStr = addressArray[1];
         NSString *commandString = [NSString stringWithFormat:@"xcrun atos -arch %@ -o \"%@\" -l %@ %@", self.selectedUUIDInfo.arch, self.selectedUUIDInfo.executableFilePath, slideAddressStr, errorAddressStr];
         NSString *result = [self runCommand:commandString];
-        resultStr = [NSString stringWithFormat:@"%@\n%@",resultStr,result] ;
+        NSString *prefix = [str substringWithRange:preStr];
+        NSString *finalResu = [NSString stringWithFormat:@"%@%@",prefix,result];
+        resultStr = [NSString stringWithFormat:@"%@%@",resultStr,finalResu];
     }
     [self.errorMessageView setString:resultStr];
 }
